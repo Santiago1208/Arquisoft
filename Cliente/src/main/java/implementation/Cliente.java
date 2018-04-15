@@ -32,7 +32,7 @@ public class Cliente implements Runnable {
 			for (int i = 0; i < GeneradorArchivos.tamanos.length; i++) {
 				ArrayList<Integer> numeros = new ArrayList<Integer>();
 				BufferedReader br = new BufferedReader(new FileReader(GeneradorArchivos.ruta+"archivo"+(i+1)));
-				for (int j = 0; j < GeneradorArchivos.tamanos[0]; j++) {
+				for (int j = 0; j < GeneradorArchivos.tamanos[i]; j++) {
 					numeros.add(Integer.parseInt(br.readLine()));
 				}
 				br.close();

@@ -2,10 +2,21 @@ package implementation;
 
 import java.util.ArrayList;
 
+import org.osoa.sca.annotations.Reference;
+
+import interfaces.IPartialSort;
 import interfaces.ISort;
 
 public class OrdenarImplementacion implements ISort {
 
+	@Reference(name="IPartialSort")
+	private IPartialSort partialSort1;
+	@Reference(name="IPartialSort")
+	private IPartialSort partialSort2;
+	@Reference(name="IPartialSort")
+	private IPartialSort partialSort3;
+	@Reference(name="IPartialSort")
+	private IPartialSort partialSort4;
 	
 	@Override
 	public ArrayList<Character> sort(ArrayList<Character> lista) {
@@ -14,29 +25,40 @@ public class OrdenarImplementacion implements ISort {
 		System.out.println("****La operación fue recibida, tamanio: " + lista.size() +" #s****");		
 //		System.out.println("La lista contiene: " + listarItems(lista));
 		
-		sortMerge(lista, 0, lista.size() - 1);
+		int m1 = (lista.size()-1)/2;
+		int m2 = m1/2;
+		int m3 = m1+m2;
 		
+		ArrayList<ArrayList<Character>> listasArrayList = new ArrayList<ArrayList<Character>>();
+		listasArrayList.add(partialSort1.partialSort(lista, 0, m2));
+		listasArrayList.add(partialSort2.partialSort(lista, m2+1, m1));
+		listasArrayList.add(partialSort3.partialSort(lista, m1+1, m3));
+		listasArrayList.add(partialSort4.partialSort(lista, m3+1, lista.size()-1));
+		
+		int com = 1;
+		int i = 0;
+		int tamArrayList = listasArrayList.size();
+		while(i<tamArrayList) {
+			if(listasArrayList.get(i+com)!=null) {
+				boolean seUnio = listasArrayList.get(i).addAll(listasArrayList.get(i).size(), listasArrayList.get(i+com));
+				if(seUnio) {
+					merge(listasArrayList.get(i), 0, (listasArrayList.get(i).size()-1)/2, listasArrayList.get(i).size()-1);
+				}
+			}
+			i+=2;
+			if(i==listasArrayList.size() || i==listasArrayList.size()-1) {
+				com = com+1;;
+				if(com!=listasArrayList.size()-1) {
+					i= 0;
+				}
+		}
+		
+		}
+			
 		System.out.println("****La operación finalizada****");
 //		System.out.println("La lista contiene: " + listarItems(lista));		
 		
-		return lista;
-	}
-	
-	public void sortMerge(ArrayList<Character> lista, int l, int r) {
-		
-		if (l < r)
-        {
-            // Find the middle point
-            int m = (l+r)/2;
- 
-            // Sort first and second halves
-            sortMerge(lista, l, m);
-            sortMerge(lista , m+1, r);
- 
-            // Merge the sorted halves
-            merge(lista, l, m, r);
-        }
-		
+		return listasArrayList.get(0);
 	}
 	
 	
