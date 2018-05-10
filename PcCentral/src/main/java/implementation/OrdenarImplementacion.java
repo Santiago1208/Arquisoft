@@ -18,6 +18,9 @@ public class OrdenarImplementacion implements ISort {
 	@Reference(name="IPartialSort")
 	private IPartialSort partialSort4;
 	
+	private Thread particionamientos;
+	private ArrayList<ArrayList<Character>> listasArrayList;
+	
 	@Override
 	public ArrayList<Character> sort(ArrayList<Character> lista) {
 		// TODO Auto-generated method stub
@@ -25,11 +28,14 @@ public class OrdenarImplementacion implements ISort {
 		System.out.println("****La operación fue recibida, tamanio: " + lista.size() +" #s****");		
 //		System.out.println("La lista contiene: " + listarItems(lista));
 		
+		listasArrayList = new ArrayList<ArrayList<Character>>();
+
+		
 		int m1 = (lista.size()-1)/2;
 		int m2 = m1/2;
 		int m3 = m1+m2;
 		
-		ArrayList<ArrayList<Character>> listasArrayList = new ArrayList<ArrayList<Character>>();
+		
 		listasArrayList.add(partialSort1.partialSort(lista, 0, m2));
 		listasArrayList.add(partialSort2.partialSort(lista, m2+1, m1));
 		listasArrayList.add(partialSort3.partialSort(lista, m1+1, m3));
