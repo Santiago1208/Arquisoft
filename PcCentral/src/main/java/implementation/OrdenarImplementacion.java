@@ -18,7 +18,7 @@ public class OrdenarImplementacion implements ISort {
 	@Reference(name="IPartialSort")
 	private IPartialSort partialSort4;
 	
-	//Este hilo es el que me permitirá hacer los sorts paralelamente
+	//Este hilo es el que me permitirá hacer los sorts paralelamente entregándoles los TPartialSorts
 	private Thread particionamientos;
 	private ArrayList<ArrayList<Character>> listasArrayList;
 	
