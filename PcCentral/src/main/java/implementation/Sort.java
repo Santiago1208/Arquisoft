@@ -20,7 +20,7 @@ public class Sort implements ISort {
 	@Reference(name="IPartialSort")
 	private IPartialSort partialSort4;
 	
-	//Este hilo es el que me permitirá hacer los sorts paralelamente entregándoles los TPartialSorts
+	//Este hilo es el que me permitirï¿½ hacer los sorts paralelamente entregï¿½ndoles los TPartialSorts
 	private ArrayList<ArrayList<Character>> listasArrayList;
 	
 	private CyclicBarrier barreraFin;
@@ -32,8 +32,8 @@ public class Sort implements ISort {
 	public ArrayList<Character> sort(ArrayList<Character> lista) {
 		// TODO Auto-generated method stub
 		tamanioLista= lista.size();
-        final CyclicBarrier barreraFin = new CyclicBarrier(5);
-		System.out.println("****La operación fue recibida, tamanio: " + lista.size() +" #s****");		
+		barreraFin = new CyclicBarrier(5);
+		System.out.println("****La operaciï¿½n fue recibida, tamanio: " + lista.size() +" #s****");		
 //		System.out.println("La lista contiene: " + listarItems(lista));
 		
 		listasArrayList = new ArrayList<ArrayList<Character>>();
@@ -56,8 +56,15 @@ public class Sort implements ISort {
 		partialSort3.setBarreraFin(barreraFin);
 		partialSort4.setLista(lista4);
 		partialSort4.setBarreraFin(barreraFin);
-		partialSort4.run();
-		
+		Thread t1= new Thread(partialSort1);
+		Thread t2= new Thread(partialSort2);
+		Thread t3= new Thread(partialSort3);
+		Thread t4= new Thread(partialSort4);
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+
 		
 		try {
 			barreraFin.await();
@@ -66,7 +73,10 @@ public class Sort implements ISort {
 			e.printStackTrace();
 		}
         System.out.println("Todos los nodos ya ordenaron");
-        
+        lista1= partialSort1.getLista();
+        lista2= partialSort2.getLista();
+        lista3= partialSort3.getLista();
+        lista4= partialSort4.getLista();
 
         
         listasArrayList.add(lista1);
@@ -77,7 +87,7 @@ public class Sort implements ISort {
         lista = merge(listasArrayList);
         
 		
-		System.out.println("****La operación finalizada****");
+		System.out.println("****La operaciï¿½n finalizada****");
 //		System.out.println("La lista contiene: " + listarItems(lista));		
 		
 		return lista;

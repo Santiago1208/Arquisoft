@@ -99,14 +99,14 @@ public class PartialSort implements IPartialSort, Runnable {
 	}
 	
 	
-	public String listarItems(ArrayList lista) {
-		String cadena = "";	
-		
-		for (int i = 0; i < lista.size(); i++) {			
-			cadena += lista.get(i) + "-";			
-		}		
-		return cadena;
-	}
+//	public String listarItems(ArrayList lista) {
+//		String cadena = "";	
+//		
+//		for (int i = 0; i < lista.size(); i++) {			
+//			cadena += lista.get(i) + "-";			
+//		}		
+//		return cadena;
+//	}
 
 	@Override
 	public void run() {
@@ -132,6 +132,12 @@ public class PartialSort implements IPartialSort, Runnable {
 	public void setBarreraFin(CyclicBarrier barreraFin) {
 		this.barreraFin = barreraFin;
 		
+	}
+
+	@Override
+	public ArrayList<Character> getLista() {
+		// TODO Auto-generated method stub
+		return this.lista;
 	}
 
 

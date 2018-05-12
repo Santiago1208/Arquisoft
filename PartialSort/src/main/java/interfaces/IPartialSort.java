@@ -13,6 +13,6 @@ public interface IPartialSort extends Runnable {
 	public void setLista(ArrayList<Character> lista);
 	
     public void setBarreraFin(CyclicBarrier barreraFin);
-    
+    public ArrayList<Character> getLista();
    
 }
