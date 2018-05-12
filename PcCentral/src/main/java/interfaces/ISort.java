@@ -8,4 +8,7 @@ import org.osoa.sca.annotations.Service;
 public interface ISort {
 
 	public ArrayList<Character> sort(ArrayList<Character> lista);
+	
+	
+	
 }

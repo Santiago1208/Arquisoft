@@ -1,10 +1,17 @@
 package implementation;
 
 import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 import interfaces.IPartialSort;
 
-public class OrdenarImplementacionParcial implements IPartialSort {
+public class PartialSort implements IPartialSort, Runnable {
+
+	private ArrayList<Character> lista;
+
+
+	private CyclicBarrier barreraFin;
 
 	
 	@Override
@@ -100,5 +107,32 @@ public class OrdenarImplementacionParcial implements IPartialSort {
 		}		
 		return cadena;
 	}
+
+	@Override
+	public void run() {
+        System.out.println("hilo ejecutandose");
+		lista = sortMerge(lista, 0, lista.size()-1);
+        try {
+			barreraFin.await();
+		} catch (InterruptedException | BrokenBarrierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
+
+	@Override
+	public void setLista(ArrayList<Character> lista) {
+		this.lista = lista;
+		
+	}
+
+	@Override
+	public void setBarreraFin(CyclicBarrier barreraFin) {
+		this.barreraFin = barreraFin;
+		
+	}
+
 
 }
