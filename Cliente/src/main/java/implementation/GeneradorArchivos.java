@@ -27,10 +27,19 @@ public class GeneradorArchivos {
 					archivo.createNewFile();
 					PrintWriter pw = new PrintWriter(new FileWriter(archivo));
 					for (int j = 0; j < tamanos[i]; j++) {
-						// Valor entre M y N, ambos incluidos.
-						int asciiCode = (int) Math.floor(Math.random()*(upperBoundAscii - lowerBoundAscii + 1) + lowerBoundAscii);
-						Character character = new Character((char) asciiCode);
-						pw.write("" + character + "\n");
+						if(j<tamanos[i]-1) {
+							// Valor entre M y N, ambos incluidos.
+							int asciiCode = (int) Math.floor(Math.random()*(upperBoundAscii - lowerBoundAscii + 1) + lowerBoundAscii);
+							Character character = new Character((char) asciiCode);
+							pw.write("" + character + "\n");
+						}
+						else {
+							// Valor entre M y N, ambos incluidos.
+							int asciiCode = (int) Math.floor(Math.random()*(upperBoundAscii - lowerBoundAscii + 1) + lowerBoundAscii);
+							Character character = new Character((char) asciiCode);
+							pw.write("" + character);
+						}
+					
 					}
 					pw.close();
 				} catch (IOException e) {
