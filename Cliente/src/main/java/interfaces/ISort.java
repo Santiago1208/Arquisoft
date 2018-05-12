@@ -7,5 +7,6 @@ import org.osoa.sca.annotations.Service;
 @Service
 public interface ISort {
 	
-	public ArrayList sort(ArrayList arreglo);
+	public ArrayList<Character> sort(ArrayList<Character> arreglo);
+	
 }

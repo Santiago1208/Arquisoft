@@ -22,34 +22,35 @@ public class Cliente implements Runnable {
 	@Override
 	public void run() {
 		
-		System.out.println("Inicio...");
-		
-		generador = new GeneradorArchivos();
-		generador.generarArhivos();
-		System.out.println("Se generaron los archivos");
-		
-		try {
-			for (int i = 0; i < GeneradorArchivos.tamanos.length; i++) {
-				ArrayList<Integer> numeros = new ArrayList<Integer>();
-				BufferedReader br = new BufferedReader(new FileReader(GeneradorArchivos.ruta+"archivo"+(i+1)));
-				for (int j = 0; j < GeneradorArchivos.tamanos[i]; j++) {
-					numeros.add(Integer.parseInt(br.readLine()));
-				}
-				br.close();
-				System.out.println("Se obtuvo el arreglo "+(i+1)+" de tamano "+GeneradorArchivos.tamanos[i]);
-				long t1 = System.currentTimeMillis();
-				numeros = sort.sort(numeros);
-				long t2 = System.currentTimeMillis();
-				long tiempo = t2-t1;
-				System.out.println("Se ordeno el arreglo "+(i+1)+" en "+tiempo+" ms");
-			}
-			System.out.println("Fin... :)");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		
+//		System.out.println("Intenta hacer peticion de Sort");
+//		System.out.println("===========================================================================");
+//		
+//		generador = new GeneradorArchivos();
+//		generador.generarArhivos();
+//		System.out.println("Se generaron los archivos");
+//		
+//		try {
+//			for (int i = 0; i < GeneradorArchivos.tamanos.length; i++) {
+//				ArrayList<> numeros = new ArrayList<Integer>();
+//				BufferedReader br = new BufferedReader(new FileReader(GeneradorArchivos.ruta+"archivo"+(i+1)));
+//				for (int j = 0; j < GeneradorArchivos.tamanos[i]; j++) {
+//					numeros.add(Integer.parseInt(br.readLine()));
+//				}
+//				br.close();
+//				System.out.println("Se obtuvo el arreglo "+(i+1)+" de tamano "+GeneradorArchivos.tamanos[i]);
+//				long t1 = System.currentTimeMillis();
+//				numeros = sort.sort(numeros);
+//				long t2 = System.currentTimeMillis();
+//				long tiempo = t2-t1;
+//				System.out.println("Se ordeno el arreglo "+(i+1)+" en "+tiempo+" ms");
+//			}
+//			System.out.println("Fin... :)");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		
+//		
 	}
 
 }
