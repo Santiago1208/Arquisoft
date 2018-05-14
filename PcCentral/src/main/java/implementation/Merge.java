@@ -6,8 +6,6 @@ import interfaces.IMerge;
 
 public class Merge implements IMerge{
 	
-	private int tamanioLista;
-
 	@Override
 	public ArrayList<Character> merge(ArrayList<ArrayList<Character>> listas, int tamanioListafinal) {
 		
@@ -28,7 +26,7 @@ public class Merge implements IMerge{
 		ArrayList<Character> lista2 = listas.get(1);
 		ArrayList<Character> lista3 = listas.get(2);
 		ArrayList<Character> lista4 = listas.get(3);
-		for (int i = 0; i < tamanioLista; i++) {
+		for (int i = 0; i < tamanioListafinal; i++) {
 
 			if(lista1.get(w).compareTo(lista2.get(x))<=0
 			&& lista1.get(w).compareTo(lista3.get(y))<=0
