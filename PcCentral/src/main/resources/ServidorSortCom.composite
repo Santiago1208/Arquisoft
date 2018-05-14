@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0" xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1" xmlns:wsdli="http://www.w3.org/2004/08/wsdl-instance" name="ServidorSortCom">
+	<component name="insertion">
+		<service name="ISort">
+			<interface.java interface="interfaces.ISort" />
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1099"/>
+		</service>
+		<reference name="IPartialSort1">
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1098"/>
+		</reference>
+		<reference name="IPartialSort2">
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1097"/>
+		</reference>
+		<reference name="IPartialSort3">
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1096"/>
+		</reference>
+		<reference name="IPartialSort4">
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1095"/>
+		</reference>
+		<reference name="IMerge">
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1094"/>
+		</reference>
+		<implementation.java class="implementation.Control" />
+	</component>
+</composite>

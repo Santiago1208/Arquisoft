@@ -6,34 +6,33 @@ import java.util.concurrent.CyclicBarrier;
 
 import org.osoa.sca.annotations.Reference;
 
+import interfaces.IMerge;
 import interfaces.IPartialSort;
 import interfaces.ISort;
 
-public class Sort implements ISort {
+public class Control implements ISort {
 	
-	@Reference(name="IPartialSort")
+	@Reference(name="IPartialSort1")
 	private IPartialSort partialSort1;
-	@Reference(name="IPartialSort")
+	@Reference(name="IPartialSort2")
 	private IPartialSort partialSort2;
-	@Reference(name="IPartialSort")
+	@Reference(name="IPartialSort3")
 	private IPartialSort partialSort3;
-	@Reference(name="IPartialSort")
+	@Reference(name="IPartialSort4")
 	private IPartialSort partialSort4;
+	@Reference(name="IMerge")
+	private IMerge merge;
 	
 	//Este hilo es el que me permitir� hacer los sorts paralelamente entreg�ndoles los TPartialSorts
 	private ArrayList<ArrayList<Character>> listasArrayList;
 	
 	private CyclicBarrier barreraFin;
 	
-	private int tamanioLista;
-
-	
 	@Override
 	public ArrayList<Character> sort(ArrayList<Character> lista) {
 		// TODO Auto-generated method stub
-		tamanioLista= lista.size();
 		barreraFin = new CyclicBarrier(5);
-		System.out.println("****La operaci�n fue recibida, tamanio: " + lista.size() +" #s****");		
+		System.out.println("****La operacion fue recibida, tamanio: " + lista.size() +" #s****");		
 //		System.out.println("La lista contiene: " + listarItems(lista));
 		
 		listasArrayList = new ArrayList<ArrayList<Character>>();
@@ -84,58 +83,13 @@ public class Sort implements ISort {
         listasArrayList.add(lista3);
         listasArrayList.add(lista4);
         
-        lista = merge(listasArrayList);
+        lista = merge.merge(listasArrayList, lista.size());
         
 		
-		System.out.println("****La operaci�n finalizada****");
+		System.out.println("****La operacion finalizada****");
 //		System.out.println("La lista contiene: " + listarItems(lista));		
 		
 		return lista;
 	}
 	
-	public ArrayList<Character> merge(ArrayList<ArrayList<Character>> listas) {
-		
-		ArrayList<Character> listaOrdenada = new ArrayList<>();
-		int w = 0;
-		int x = 0;
-		int y = 0;
-		int z = 0;
-		ArrayList<Character> lista1 = listas.get(0);
-		ArrayList<Character> lista2 = listas.get(1);
-		ArrayList<Character> lista3 = listas.get(2);
-		ArrayList<Character> lista4 = listas.get(3);
-		for (int i = 0; i < tamanioLista; i++) {
-
-			if(lista1.get(w).compareTo(lista2.get(x))<=0
-			&& lista1.get(w).compareTo(lista3.get(y))<=0
-			&& lista1.get(w).compareTo(lista4.get(z))<=0) {
-				listaOrdenada.add(lista1.get(w));
-				w++;
-			}
-			
-			else if(lista2.get(x).compareTo(lista1.get(w))<=0
-			&& lista2.get(x).compareTo(lista3.get(y))<=0
-			&& lista2.get(x).compareTo(lista4.get(z))<=0) {
-				listaOrdenada.add(lista2.get(x));
-				x++;
-			}
-			
-			else if(lista3.get(y).compareTo(lista1.get(w))<=0
-			&& lista3.get(y).compareTo(lista2.get(x))<=0
-			&& lista3.get(y).compareTo(lista4.get(z))<=0) {
-				listaOrdenada.add(lista3.get(y));
-				y++;
-			}
-			
-			else if(lista4.get(z).compareTo(lista1.get(w))<=0
-			&& lista4.get(z).compareTo(lista2.get(x))<=0
-			&& lista4.get(z).compareTo(lista3.get(y))<=0) {
-				listaOrdenada.add(lista4.get(z));
-				z++;
-			}
-		}	
-		
-		return listaOrdenada;
-	}
-
 }

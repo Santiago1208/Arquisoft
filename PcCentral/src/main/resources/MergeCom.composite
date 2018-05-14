@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0" xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1" xmlns:wsdli="http://www.w3.org/2004/08/wsdl-instance" name="MergeCom">
+	<component name="Merge">
+		<service name="IMerge">
+			<interface.java interface="interfaces.IMerge" />
+			<frascati:binding.rmi host="localhost" serviceName="rmiService" port="1094"/>
+		</service>
+		<implementation.java class="implementation.Merge" />
+	</component>
+</composite>
