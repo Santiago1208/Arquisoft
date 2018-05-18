@@ -6,13 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 
 import interfaces.IPartialSort;
 
-public class PartialSort implements IPartialSort, Runnable {
-
-	private ArrayList<Character> lista;
-
-
-	private CyclicBarrier barreraFin;
-
+public class PartialSort implements IPartialSort {
 	
 	@Override
 	public ArrayList<Character> partialSort(ArrayList<Character> lista, int l, int r) {
@@ -99,46 +93,5 @@ public class PartialSort implements IPartialSort, Runnable {
 	}
 	
 	
-//	public String listarItems(ArrayList lista) {
-//		String cadena = "";	
-//		
-//		for (int i = 0; i < lista.size(); i++) {			
-//			cadena += lista.get(i) + "-";			
-//		}		
-//		return cadena;
-//	}
-
-	@Override
-	public void run() {
-        System.out.println("hilo ejecutandose");
-		lista = sortMerge(lista, 0, lista.size()-1);
-        try {
-			barreraFin.await();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-	}
-
-	@Override
-	public void setLista(ArrayList<Character> lista) {
-		this.lista = lista;
-		
-	}
-
-	@Override
-	public void setBarreraFin(CyclicBarrier barreraFin) {
-		this.barreraFin = barreraFin;
-		
-	}
-
-	@Override
-	public ArrayList<Character> getLista() {
-		// TODO Auto-generated method stub
-		return this.lista;
-	}
-
 
 }
