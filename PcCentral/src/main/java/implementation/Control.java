@@ -23,6 +23,11 @@ public class Control implements ISort {
 	@Reference(name="IMerge")
 	private IMerge merge;
 	
+	private ArrayList<Character> lista1;
+	private ArrayList<Character> lista2;
+	private ArrayList<Character> lista3;
+	private ArrayList<Character> lista4;
+	
 	//Este hilo es el que me permitir hacer los sorts paralelamente entregndoles los TPartialSorts
 	private ArrayList<ArrayList<Character>> listasArrayList;
 	
@@ -38,27 +43,69 @@ public class Control implements ISort {
 		listasArrayList = new ArrayList<ArrayList<Character>>();
 
 		
-		int m1 = (lista.size()-1)/2; //50%
-		int m2 = m1/2; //25%
-		int m3 = m1+m2; //75%
+		final int m1 = (lista.size()-1)/2; //50%
+		final int m2 = m1/2; //25%
+		final int m3 = m1+m2; //75%
 		
-		ArrayList<Character> lista1 = (ArrayList<Character>)lista.subList(0, m2);
-		ArrayList<Character> lista2 = (ArrayList<Character>)lista.subList(m2+1, m1);
-		ArrayList<Character> lista3 = (ArrayList<Character>)lista.subList(m1+1, m3);
-		ArrayList<Character> lista4 = (ArrayList<Character>)lista.subList(m3+1, lista.size()-1);
+		lista1 = (ArrayList<Character>)lista.subList(0, m2);
+		lista2 = (ArrayList<Character>)lista.subList(m2+1, m1);
+		lista3 = (ArrayList<Character>)lista.subList(m1+1, m3);
+		lista4 = (ArrayList<Character>)lista.subList(m3+1, lista.size()-1);
 		
-		partialSort1.setLista(lista1);
-		partialSort1.setBarreraFin(barreraFin);
-		partialSort2.setLista(lista2);
-		partialSort2.setBarreraFin(barreraFin);
-		partialSort3.setLista(lista3);
-		partialSort3.setBarreraFin(barreraFin);
-		partialSort4.setLista(lista4);
-		partialSort4.setBarreraFin(barreraFin);
-		Thread t1= new Thread(partialSort1);
-		Thread t2= new Thread(partialSort2);
-		Thread t3= new Thread(partialSort3);
-		Thread t4= new Thread(partialSort4);
+
+		Thread t1 = new Thread() {
+            public void run() {
+            	lista1=partialSort1.partialSort(lista1,0,lista1.size()-1);
+                System.out.println("hilo ejecutandose");
+                try {                	
+                    barreraFin.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+		};
+		
+		
+		Thread t2 = new Thread() {
+            public void run() {
+            	
+            	lista2=partialSort2.partialSort(lista2,0,lista2.size()-1);
+                try {
+                    
+                    System.out.println("hilo ejecutandose");
+                    barreraFin.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+		};
+		Thread t3 = new Thread() {
+            public void run() {
+            	
+            	lista3=partialSort3.partialSort(lista3,0,lista3.size()-1);
+                try {
+                    
+                    System.out.println("hilo ejecutandose");
+                    barreraFin.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+		};
+		Thread t4 = new Thread() {
+            public void run() {
+            	
+            	lista4=partialSort4.partialSort(lista4,0,lista4.size()-1);
+                try {
+                    
+                    System.out.println("hilo ejecutandose");
+                    barreraFin.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+		};
+
 		t1.start();
 		t2.start();
 		t3.start();
@@ -72,10 +119,7 @@ public class Control implements ISort {
 			e.printStackTrace();
 		}
         System.out.println("Todos los nodos ya ordenaron");
-        lista1= partialSort1.getLista();
-        lista2= partialSort2.getLista();
-        lista3= partialSort3.getLista();
-        lista4= partialSort4.getLista();
+        
 
         
         listasArrayList.add(lista1);
