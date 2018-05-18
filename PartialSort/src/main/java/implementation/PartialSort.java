@@ -114,7 +114,7 @@ public class PartialSort implements IPartialSort, Runnable {
 		lista = sortMerge(lista, 0, lista.size()-1);
         try {
 			barreraFin.await();
-		} catch (InterruptedException | BrokenBarrierException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
