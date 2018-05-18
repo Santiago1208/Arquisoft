@@ -9,14 +9,8 @@ public class Merge implements IMerge{
 	@Override
 	public ArrayList<Character> merge(ArrayList<ArrayList<Character>> listas, int tamanioListafinal) {
 		
-		ArrayList<Character> listaOrdenada = new ArrayList<>();
+		ArrayList<Character> listaOrdenada = new ArrayList<Character>();
 		
-		/**
-		 * No lo hice como Ana decía porque cada vez que se encuentre el menor de los cuatro arrays
-		 * se elimina del array que lo contenía, pero al hacerlo, recorre los indices posteriores para 
-		 * correrlos una posición a la izquierda y eso no es eficiente comparado al método que se 
-		 * encuentra a continuación:
-		 */
 		
 		int w = 0;
 		int x = 0;

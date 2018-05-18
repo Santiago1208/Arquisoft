@@ -23,7 +23,7 @@ public class Control implements ISort {
 	@Reference(name="IMerge")
 	private IMerge merge;
 	
-	//Este hilo es el que me permitir� hacer los sorts paralelamente entreg�ndoles los TPartialSorts
+	//Este hilo es el que me permitir hacer los sorts paralelamente entregndoles los TPartialSorts
 	private ArrayList<ArrayList<Character>> listasArrayList;
 	
 	private CyclicBarrier barreraFin;
@@ -67,7 +67,7 @@ public class Control implements ISort {
 		
 		try {
 			barreraFin.await();
-		} catch (InterruptedException | BrokenBarrierException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
