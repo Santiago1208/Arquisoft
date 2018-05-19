@@ -43,14 +43,14 @@ public class Control implements ISort {
 		listasArrayList = new ArrayList<ArrayList<Character>>();
 
 		
-		final int m1 = (lista.size()-1)/2; //50%
-		final int m2 = m1/2; //25%
-		final int m3 = m1+m2; //75%
+		int m1 = (lista.size()-1)/2; //50%
+		int m2 = m1/2; //25%
+	    int m3 = m1+m2; //75%
 		
-		lista1 = (ArrayList<Character>)lista.subList(0, m2);
-		lista2 = (ArrayList<Character>)lista.subList(m2+1, m1);
-		lista3 = (ArrayList<Character>)lista.subList(m1+1, m3);
-		lista4 = (ArrayList<Character>)lista.subList(m3+1, lista.size()-1);
+		lista1 = new ArrayList<Character>(lista.subList(0, m2));
+		lista2 = new ArrayList<Character>(lista.subList(m2+1, m1));
+		lista3 = new ArrayList<Character>(lista.subList(m1+1, m3));
+		lista4 = new ArrayList<Character>(lista.subList(m3+1, lista.size()-1));
 		
 
 		Thread t1 = new Thread() {
